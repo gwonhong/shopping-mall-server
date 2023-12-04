@@ -1,5 +1,5 @@
-const User = (sequelize, DataTypes) =>
-  sequelize.define("user", {
+const Seller = (sequelize, DataTypes) =>
+  sequelize.define("seller", {
     id: {
       type: DataTypes.STRING,
       primaryKey: true,
@@ -29,4 +29,4 @@ const User = (sequelize, DataTypes) =>
     },
   });
 
-export default User;
+export default Seller;
