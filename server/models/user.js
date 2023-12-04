@@ -3,11 +3,18 @@ const User = (sequelize, DataTypes) =>
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+        notEmpty: true,
+      },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
