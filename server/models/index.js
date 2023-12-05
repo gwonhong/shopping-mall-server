@@ -16,6 +16,7 @@ const sequelize = new Sequelize(env.DB_DATABASE, env.DB_USER, env.DB_PASSWORD, {
 });
 
 const db = {};
+// Tables
 db.User = User(sequelize, DataTypes);
 db.Seller = Seller(sequelize, DataTypes);
 db.Product = Product(sequelize, DataTypes);
@@ -23,6 +24,7 @@ db.CartItem = CartItem(sequelize, DataTypes);
 db.Order = Order(sequelize, DataTypes);
 db.OrderItem = OrderItem(sequelize, DataTypes);
 
+// Associations
 db.User.hasMany(db.CartItem);
 db.User.hasMany(db.Order);
 db.Seller.hasMany(db.Product);
