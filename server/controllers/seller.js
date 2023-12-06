@@ -1,4 +1,5 @@
 import db from "../models/index.js";
+import { generateToken, authenticateToken } from "../utils/jwtAuth.js";
 
 // Create, Update, Delete Seller
 const createSeller = async (req, res, next) => {
@@ -45,9 +46,20 @@ const createSeller = async (req, res, next) => {
   };
 
 // Read & Authenticate Seller
-const sellerLogin = (req, res, next) => {
+const sellerLogin = async (req, res, next) => {
+  const { id, password } = req.body;
+  try {
+    const seller = await db.Seller.findByPk(id);
+    if (!seller) throw new Error("id not found");
+    if (password !== seller.password) throw new Error("Password does not match");
+    const token = generateToken({ id, type: "seller" });
+    res.json({ token });
+  } catch (err) {
+    console.error(err);
+    res.send(err);
+  }
 };
 const sellerLogout =  (req, res, next) => {
 };
 
-export {createSeller, editSeller, deleteSeller, sellerLogin, sellerLogout};
+export default {createSeller, editSeller, deleteSeller, sellerLogin, sellerLogout};

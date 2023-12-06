@@ -1,4 +1,5 @@
 import db from "../models/index.js";
+import { generateToken, authenticateToken } from "../utils/jwtAuth.js";
 
 // Create, Update, Delete User
 const createUser = async (req, res, next) => {
@@ -6,6 +7,7 @@ const createUser = async (req, res, next) => {
   try {
     const newUser = await db.User.create({ id, password, name, email });
     console.log(newUser);
+    res.status(403);
     res.send(true);
   } catch (err) {
     console.error(err);
@@ -45,7 +47,19 @@ const deleteUser = async (req, res, next) => {
 };
 
 // Read & Authenticate User
-const userLogin = (req, res, next) => {};
+const userLogin = async (req, res, next) => {
+  const { id, password } = req.body;
+  try {
+    const user = await db.User.findByPk(id);
+    if (!user) throw new Error("id not found");
+    if (password !== user.password) throw new Error("Password does not match");
+    const token = generateToken({ id, type: "user" });
+    res.json({ token });
+  } catch (err) {
+    console.error(err);
+    res.send(err);
+  }
+};
 const userLogout = (req, res, next) => {};
 
-export { createUser, editUser, deleteUser, userLogin, userLogout };
+export default { createUser, editUser, deleteUser, userLogin, userLogout };
