@@ -15,31 +15,35 @@ const createUser = async (req, res, next) => {
   }
 };
 const editUser = async (req, res, next) => {
+  const token = req.body.token;
   const { id, password, name, email } = req.body;
   try {
+    const decoded = authenticateToken(token);
+    if (decoded.id !== id) throw new Error("Wrong Token id");
+
     const currentUser = await db.User.findByPk(id);
-    if (!currentUser) {
-      res.send("User Not Found");
-    }
+    if (!currentUser) throw new Error("User Not Found");
+
     currentUser.set({ password, name, email });
     const result = await currentUser.save();
-    console.log(result);
-    res.send(true);
+    res.send(result);
   } catch (err) {
     console.error(err);
     res.send(err);
   }
 };
 const deleteUser = async (req, res, next) => {
-  const { id, password, name, email } = req.body;
+  const token = req.body.token;
+  const { id } = req.body;
   try {
+    const decoded = authenticateToken(token);
+    if (decoded.id !== id) throw new Error("Wrong Token id");
+
     const currentUser = await db.User.findByPk(id);
-    if (!currentUser) {
-      res.send("User Not Found");
-    }
+    if (!currentUser) throw new Error("User Not Found");
+
     const result = await currentUser.destroy();
-    console.log(result);
-    res.send(true);
+    res.send(result);
   } catch (err) {
     console.error(err);
     res.send(err);
