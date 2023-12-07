@@ -7,12 +7,12 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the react app in the development mode.\
-Open [http://localhost:3001](http://localhost:3001) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-And it also runs the node server concurrently at [http://localhost:3000](http://localhost:3000).
+And it also runs the node server concurrently at [http://localhost:8080](http://localhost:8080).
 
 ## Client
 
