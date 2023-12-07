@@ -63,5 +63,3 @@ And it also runs the node server concurrently at [http://localhost:8080](http://
 ### ERD
 
 ![ShoppingMall](https://github.com/gwonhong/shopping-mall/assets/75533669/2c17572d-96c2-45da-bb97-4d425fdab343)
-
-
