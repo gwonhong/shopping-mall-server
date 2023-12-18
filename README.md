@@ -48,4 +48,5 @@ Runs the node server at [http://localhost:8080](http://localhost:8080).
 
 ### ERD
 
-![ShoppingMall](https://github.com/gwonhong/shopping-mall/assets/75533669/2c17572d-96c2-45da-bb97-4d425fdab343)
+
+![ShoppingMall](https://github.com/gwonhong/shopping-mall-server/assets/75533669/c7925280-a72d-4e93-92d8-ff23340e1651)
